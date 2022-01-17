@@ -287,10 +287,8 @@ explain select * from employee3 where name='Mihir';
 -- drop index
 drop index index_emp;
 
-
-
-
-
+-- Export data
+copy table_name to 'D:/1Downloads/exported_data.csv';
 
 
 
