@@ -251,6 +251,49 @@ insert into employee3 (id, name, salary) values (10, 'Shashank', 10000);
 -- in audit table we have stored log of time when data is inserted into the employee table
 select * from employee3;
 select * from audit;
+---------------------------- 
+
+-- Show message in output
+create or replace function audit_insert()
+returns trigger as $$
+begin
+RAISE NOTICE 'Inserted';
+return new;
+end;
+$$ language plpgsql;
+
+create trigger audit_trigger_insert after insert on employee3
+for each row execute procedure audit_insert();
+
+insert into employee3 (id, name, salary) values (11, 'Mihir', 20000);
+
+-- drop trigger----
+drop trigger audit_trigger on employee3;
+
+------------------------------------------------------------------------------------------
+
+------Index--------
+select * from employee3;
+select * from employee3 where name='Mihir';
+
+explain select * from employee3 where name='Mihir';
+-- Seq Scan on employee3  (cost=0.00..25.00 rows=6 width=40), time=25
+
+-- now let's see with index
+create index index_emp on employee3(name);
+explain select * from employee3 where name='Mihir';
+-- Seq Scan on employee3  (cost=0.00..1.02 rows=1 width=40), time has reduced to 1.02
+
+-- drop index
+drop index index_emp;
+
+
+
+
+
+
+
+
 
 
 
