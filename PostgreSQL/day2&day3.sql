@@ -225,7 +225,36 @@ begin
    return film_count;
 end;
 $$;
------------------
+---------------------------------------------------------------------------------
+
+-- TRIGGER --
+create table employee3 (id int primary key, name text, salary int not null);
+create table audit (id int primary key, name text, entry_date text);
+
+-- new function, it will run as soon as new value is inserted in to employee table
+create or replace function audit_log()
+returns trigger as 
+$$
+begin 
+insert into audit (id, name, entry_date) values (new.id, new.name, current_timestamp);
+return new;
+end;
+$$ language plpgsql;
+
+-- finally we create our trigger
+create trigger audit_trigger after insert on employee3
+for each row execute procedure audit_log();
+
+-- checking if trigger is working on inserting data into the employee table
+insert into employee3 (id, name, salary) values (10, 'Shashank', 10000);
+
+-- in audit table we have stored log of time when data is inserted into the employee table
+select * from employee3;
+select * from audit;
+
+
+
+
 
 
 
