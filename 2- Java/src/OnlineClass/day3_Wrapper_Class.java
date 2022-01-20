@@ -20,7 +20,7 @@ public class day3_Wrapper_Class {
 		
 		//CUSTOM WC
 		wrapperClass w = new wrapperClass(10);
-		System.out.println(w.toSting());
+		System.out.println(w);
 	}
 
 }
