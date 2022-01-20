@@ -69,7 +69,40 @@ public class day3 {
 				System.out.println(arr5[i][j]);
 			}
 		}
+		//------------------------------------------
 		
+		//ARRAY COPY
+		int a1[]= {1,2,3,4,5};
+		int a2[]=new int[5];
+		
+		System.arraycopy(a1, 0, a2, 0, 5);
+		System.out.println("Copied array");
+		System.out.println(Arrays.toString(a2));
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
