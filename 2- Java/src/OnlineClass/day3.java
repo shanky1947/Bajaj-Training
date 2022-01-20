@@ -2,9 +2,40 @@ package OnlineClass;
 
 import java.util.Arrays;
 
+//ENCAPSULATION
+class employee{
+	private int eid;
+	private String ename;
+	//securing data variables by binding them with setter and getter methods and declare them as private
+
+	public int getEid() {
+		return eid;
+	}
+	public void setEid(int eid) {
+		this.eid = eid;
+	}
+	public String getEname() {
+		return ename;
+	}
+	public void setEname(String ename) {
+		this.ename = ename;
+	}
+
+};
+
 public class day3 {
 
 	public static void main(String[] args) {
+		employee e1=new employee();
+//		e1.eid=101; -error
+//		e1.ename="Shashank"; -error
+		e1.setEid(10);
+		e1.setEname("Shashank");
+		System.out.println(e1.getEid()+" "+e1.getEname());
+		
+		//-----------------------------------------------
+		
+		//ARRAYS
 		int arr[] = new int[8];
 		arr[0]=10;
 		arr[1]=20;
@@ -75,9 +106,19 @@ public class day3 {
 		int a1[]= {1,2,3,4,5};
 		int a2[]=new int[5];
 		
-		System.arraycopy(a1, 0, a2, 0, 5);
+		System.arraycopy(a1, 2, a2, 0, 3);  //copy from index 2 of a1 to index 0 of a2 upto length of 3
 		System.out.println("Copied array");
 		System.out.println(Arrays.toString(a2));
+		
+		//CLONE
+		int clone[]=a1.clone(); //copying complete array
+		System.out.println("Clonned array");
+		System.out.println(Arrays.toString(clone));
+		
+		int a3[]=new int[5];
+		System.arraycopy(a1, 0, a3, 0, 5);
+		System.out.println(Arrays.equals(a1, a3));
+		//--------------------------------------------
 	}
 
 }
