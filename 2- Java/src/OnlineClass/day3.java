@@ -1,11 +1,13 @@
 package OnlineClass;
 
 import java.util.Arrays;
+import java.util.Date;
 
 //ENCAPSULATION
 class employee{
 	private int eid;
 	private String ename;
+	private Date log;
 	//securing data variables by binding them with setter and getter methods and declare them as private
 
 	public int getEid() {
@@ -13,6 +15,7 @@ class employee{
 	}
 	public void setEid(int eid) {
 		this.eid = eid;
+		this.log=new java.util.Date();
 	}
 	public String getEname() {
 		return ename;
@@ -20,7 +23,12 @@ class employee{
 	public void setEname(String ename) {
 		this.ename = ename;
 	}
-
+	public void checkLog(String password) {
+		if(password=="admin")
+			System.out.println(this.eid+ " " + this.ename + " " +this.log);
+		else
+			System.out.println("Wrong password! Run away Hacker");
+	}
 };
 
 public class day3 {
@@ -32,7 +40,7 @@ public class day3 {
 		e1.setEid(10);
 		e1.setEname("Shashank");
 		System.out.println(e1.getEid()+" "+e1.getEname());
-		
+		e1.checkLog("admin");
 		//-----------------------------------------------
 		
 		//ARRAYS
