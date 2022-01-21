@@ -63,8 +63,7 @@ public class day4_Anonymous {
 		i3.display(20);
 		
 		//Error-> Lambda experession do not works with abstract class, works only with functional interfaces
-		c cc=()->System.out.println("sdd");
-		
-		cc.display();
+		//c cc=()->System.out.println("sdd");
+		//cc.display();
 	}
 }
