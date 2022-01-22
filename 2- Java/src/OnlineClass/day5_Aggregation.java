@@ -1,16 +1,5 @@
 package OnlineClass;
 
-public class day5_Aggregation {
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	}
-
-}
-package OnlineClasses;
-
-
 class Address
 {
 	String city,state,country;
@@ -22,12 +11,11 @@ class Address
 	}
 }
 
-class Aggregation
-{
+public class day5_Aggregation {
 	int id;
 	String name;
 	Address address;
-	public Aggregation(int id, String name,Address address)
+	public day5_Aggregation(int id, String name,Address address)
 	{
 		this.id = id;
 		this.name = name;
@@ -42,8 +30,8 @@ class Aggregation
 	{
 		Address address1=new Address("gzb","UP","india");
 		Address address2=new Address("gno","UP","india");
-		Aggregation e=new Aggregation(111,"varun",address1);
-		Aggregation e2=new Aggregation(112,"arun",address2);
+		day5_Aggregation e=new day5_Aggregation(111,"varun",address1);
+		day5_Aggregation e2=new day5_Aggregation(112,"arun",address2);
 		e.display();
 		e2.display();
 	}

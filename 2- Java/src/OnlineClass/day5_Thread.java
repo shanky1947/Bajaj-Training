@@ -14,7 +14,6 @@ public class day5_Thread extends Thread
 		System.out.println("Thread started/ Putside the thread");
 		th1.start();
 		System.out.println(th1.getState());
-
 	}
 }
 //-------------------------------------------------------------------------------
