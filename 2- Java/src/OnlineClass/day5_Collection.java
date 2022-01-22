@@ -1,7 +1,6 @@
 package OnlineClass;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
@@ -88,27 +87,13 @@ public class day5_Collection {
 					return -1;
 			}
 		};
+		
 		Collections.sort(values3, c);
 		System.out.println("Sorted based on last digit using comparator function: "+values3);
+		
+		//Using Lambda Expression
+		Comparator <Integer> cc = (Integer x, Integer y) -> x%10>y%10 ? 1:-1;
+		Collections.sort(values3, cc);
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
