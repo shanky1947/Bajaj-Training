@@ -40,7 +40,7 @@ alter table student1
 add 
 primary key (stu_id);
 
--- (student1_pkey- default constraint name)
+-- (student1_pkey-> default constraint name)
 alter table student1 drop constraint student1_pkey; 
 
 

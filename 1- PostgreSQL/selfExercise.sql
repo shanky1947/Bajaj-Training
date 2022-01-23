@@ -1,5 +1,5 @@
 -- Order of Execution->
--- FROM -> WHERE -> SELECT -> ORDER BY
+-- FROM -> WHERE -> GROUP BY -> HAVING -> SELECT -> DISTINCT -> ORDER BY -> LIMIT
 
 -- SELECT
 select first_name from customer;
@@ -86,6 +86,7 @@ ORDER BY customer_id;
 --LIKE
 -- _->single character, %->any characters, ~~-> similar to LIKE
 select ename from table where ename LIKE "S_a%"
+-- ILIKE
 -- macthes with cases insestively, BAR matches Bar, BAR, bar, bAR, bAr
 select ename from table where ename ILIKE "BAR%"
 -------------------------------------------------------------------------------
@@ -117,6 +118,10 @@ ORDER BY payment_date;
 -- INNER JOIN
 select p.name, c.name from parrot p INNER JOIN carrot c USING (key);
 select p.name, c.name from parrot p INNER JOIN carrot c ON p.key=c.key;
+
+--NATURAL JOIN
+-- It joins with common column name(eg id in both tables p and c)
+select p.name, c.name from parrot p NATURAL JOIN carrot c;
 -----------------------------------------------------------------------------
 
 -- SELF JOIN
@@ -141,9 +146,32 @@ INNER JOIN film f2
        f1.length = f2.length;
 -----------------------------------------------------------------------------
 
+-- CROSS JOIN
+select select_list from t1 CROSS JOIN t2;
+select select_list from t1, t2;
+select * from t1 INNER JOIN t2 ON true;
 
+-- Natural join- intersection without any condition, common columns takes
+-- Self Join- customer names from same city names 
+-- Equi join- like inner join but compares using only equal operator, in inner join any opertor
+-----------------------------------------------------------------------------
 
-
+-- GROUP BY
+-- It also works like DISTINCT clause that removes duplicate
+select customer_id, SUM(amount) from payment GROUP BY customer_id ORDER BY SUM(amount) DESC;
+SELECT
+	first_name || ' ' || last_name full_name,
+	SUM (amount) amount
+FROM
+	payment
+INNER JOIN customer USING (customer_id)    	
+GROUP BY
+	full_name
+ORDER BY amount DESC;	
+-- Will group by combining cid and sid- all possible combinations
+SELECT customer_id, staff_id, SUM(amount) FROM payment GROUP BY staff_id, customer_id ORDER BY customer_id;
+-- Converting payment_date into date as it is timestamp
+SELECT DATE(payment_date) paid_date, SUM(amount) sum FROM payment GROUP BY DATE(payment_date);
 
 
 
