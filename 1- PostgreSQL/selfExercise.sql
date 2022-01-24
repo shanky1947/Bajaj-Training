@@ -168,10 +168,115 @@ INNER JOIN customer USING (customer_id)
 GROUP BY
 	full_name
 ORDER BY amount DESC;	
+
 -- Will group by combining cid and sid- all possible combinations
 SELECT customer_id, staff_id, SUM(amount) FROM payment GROUP BY staff_id, customer_id ORDER BY customer_id;
 -- Converting payment_date into date as it is timestamp
 SELECT DATE(payment_date) paid_date, SUM(amount) sum FROM payment GROUP BY DATE(payment_date);
+------------------------------------------------------------------------------------------------
+
+-- HAVING
+-- where -> for filtering rows, having -> for filtering groups
+select column1, aggregate_function(column2) FROM table_name GROUP BY column1 HAVING condition;
+select customer_id, SUM (amount) FROM payment GROUP BY customer_id HAVING SUM (amount) > 200;
+------------------------------------------------------------------------------------------------
+
+-- UNION
+-- The number, data type and the order of the columns in the select list of both queries must be the same
+-- The UNION operator removes all duplicate rows from the combined data set
+-- To retain the duplicate rows, you use the the UNION ALL instead
+-- To sort rows in the final result set, you use the ORDER BY clause in the second query
+select select_list1 FROM table_expression1 
+UNION
+select select_list2 FROM table_expression2 ORDER BY sort_expression
+
+-- INTERSECT
+-- All properties same as UNION, it just gives common columns
+select select_list1 FROM table_expression1 
+INTERSECT
+select select_list2 FROM table_expression2 ORDER BY sort_expression
+
+-- EXCEPT
+-- All properties same as UNION, it just gives columns of table A which are not in table B
+select select_list1 FROM table_expression1 
+EXCEPT
+select select_list2 FROM table_expression2 ORDER BY sort_expression
+------------------------------------------------------------------------------------------------
+
+-- GROUPING SETS
+SELECT
+    brand,
+    segment,
+    SUM (quantity)
+FROM
+    sales
+GROUP BY
+    GROUPING SETS (
+        (brand, segment),
+        (brand),
+        (segment),
+        ()
+    );
+	
+-- GROUPING FUNCTION
+-- The GROUPING() function returns bit 0 if the argument is a member of the current grouping set and 1 otherwise.
+SELECT
+	GROUPING(brand) grouping_brand,
+	GROUPING(segment) grouping_segment,
+	brand,
+	segment,
+	SUM (quantity)
+FROM
+	sales
+GROUP BY
+	GROUPING SETS (
+		(brand),
+		(segment),
+		()
+	)
+HAVING GROUPING(brand) = 0	
+ORDER BY
+	brand,
+	segment;
+------------------------------------------------------------------------------------------------
+
+-- SUBQUERY
+SELECT film_id, title, rental_rate FROM film WHERE rental_rate > (SELECT AVG (rental_rate) FROM film);
+
+SELECT film_id, title FROM film WHERE film_id IN 
+(SELECT inventory.film_id FROM rental INNER JOIN inventory 
+ON inventory.inventory_id = rental.inventory_id WHERE
+return_date BETWEEN '2005-05-29' AND '2005-05-30');
+
+SELECT first_name, last_name FROM customer WHERE EXISTS 
+(SELECT 1 FROM payment WHERE payment.customer_id = customer.customer_id);
+------------------------------------------------------------------------------------------------
+
+-- ANY similar to any sign (>,<,!=,==)
+-- ALL -> col>ALL(subquery)-> col greater than greates value subquery
+-- col<ALL(subuery)-> col less than smallest value by the subquery
+-- EXIST-> If the subquery returns NULL, EXISTS returns true
+-- WITH cte_name AS (subquery)-> select something from cte_name->similar to view;
+------------------------------------------------------------------------------------------------
+
+-- UPDATE
+UPDATE table_name SET column1 = value1, column2 = values WHERE condition;
+
+-- UPDATE in JOIN
+UPDATE t1 SET t1.c1 = new_value FROM t2 WHERE t1.c2 = t2.c2;
+
+-- DELELT in JOIN
+DELETE FROM t1 USING t2 WHERE t1.id = t2.id;
+
+-- COPY CSV file into the table
+COPY persons(first_name, last_name, dob, email)
+FROM 'C:\sampledb\persons.csv'
+DELIMITER ','
+CSV HEADER;
+
+
+
+
 
 
 
