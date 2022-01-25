@@ -9,6 +9,7 @@
   "author": "shashank",
   "license": "ISC",
   "dependencies": {
+    "express": "^4.17.2",
     "formidable": "^2.0.1",
     "nodemailer": "^6.7.2"
   },
