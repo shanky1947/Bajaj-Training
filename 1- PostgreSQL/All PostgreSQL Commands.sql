@@ -519,14 +519,37 @@ ON CONFLICT (email) DO UPDATE SET email = EXCLUDED.email, id = EXCLUDED.id;
 ------------------------------------------------------------------------------------------------
 
 -- WINDOW FUNCTION
+SELECT coulmn_name1, 
+ window_function(column_name2),
+ OVER([PARTITION BY column_name1] [ORDER BY column_name3]) AS new_column
+FROM table_name;
 
+/*window_function= any aggregate or ranking function
+column_name1= column to be selected
+coulmn_name2= column on which window function is to be applied
+column_name3= column on whose basis partition of rows is to be done
+new_column= Name of new column
+table_name= Name of table*/
 
+-- AVG
+SELECT Name, Age, Department, Salary, 
+ AVG(Salary) OVER( PARTITION BY Department ORDER BY Age) AS Avg_Salary
+ FROM employee
 
+-- ROW NUMBER
+select * from (
+ select e.*,
+ row_number() over(partition by dept_name order by emp_id) as rn
+ from employee e) x
+where x.rn < 3;
 
-
-
-
-
+-- RANK
+select * from (
+ select e.*,
+ rank() over(partition by dept_name order by salary desc) as rnk
+ from employee e) x
+where x.rnk < 4;
+------------------------------------------------------------------------------------------------
 
 
 
