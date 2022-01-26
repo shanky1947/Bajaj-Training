@@ -346,6 +346,161 @@ CREATE TABLE Orders (
 );
 ------------------------------------------------------------------------------------------------
 
+-- NUMERIC
+-- NUMERIC(precision, scale)
+CREATE TABLE products (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    price NUMERIC(5,2)
+);
+INSERT INTO products (name, price) VALUES ('Phone',500.215), ('Tablet',500.214);
+------------------------------------------------------------------------------------------------
+
+-- DATE 
+-- uses 4 bytes
+CREATE TABLE documents (posting_date DATE DEFAULT CURRENT_DATE);
+INSERT INTO documents (posting_date)VALUES ('2005-01-01'),
+
+SELECT NOW()::date;
+SELECT TO_CHAR(NOW() :: DATE, 'dd/mm/yyyy');
+SELECT TO_CHAR(NOW() :: DATE, 'Mon dd, yyyy');
+
+SELECT first_name, last_name, now() - hire_date as diff FROM employees;
+
+SELECT first_name, last_name, AGE(birth_date) FROM employees;
+SELECT first_name, last_name, AGE('2015-01-01',birth_date) FROM employees;
+
+SELECT first_name, last_name, EXTRACT (YEAR FROM birth_date) AS YEAR,
+EXTRACT (MONTH FROM birth_date) AS MONTH,
+EXTRACT (DAY FROM birth_date) AS DAY FROM employees;
+------------------------------------------------------------------------------------------------
+
+-- TIMESTAMP
+SELECT NOW();
+SELECT CURRENT_TIMESTAMP;
+INSERT INTO timestamp_demo (ts, tstz) VALUES('2016-06-22 19:10:25-07','2016-06-22 19:10:25-07');
+------------------------------------------------------------------------------------------------
+
+-- UUID
+CREATE TABLE contacts (contact_id uuid DEFAULT uuid_generate_v4 (),);
+
+-- ARRAY
+CREATE TABLE contacts (name VARCHAR (100), phones TEXT []);
+INSERT INTO contacts (name, phones) VALUES('John Doe',ARRAY [ '(408)-589-5846','(408)-589-5555' ]);
+
+SELECT name, phones [ 1 ] FROM contacts;
+SELECT name, phones FROM contacts WHERE '(408)-589-5555' = ANY (phones);
+------------------------------------------------------------------------------------------------
+
+-- CREATE DOMAIN
+-- creates a user-defined data type with constraints such as NOT NULL, CHECK, etc.
+CREATE DOMAIN contact_name AS VARCHAR NOT NULL CHECK (value !~ '\s');
+
+CREATE TABLE mailing_list (id serial PRIMARY KEY, first_name contact_name, last_name contact_name);
+
+-- CREATE TYPE
+-- creates a composite type used in stored procedures as the data types of returned values.
+CREATE OR REPLACE FUNCTION get_film_summary (f_id INT) 
+    RETURNS film_summary AS 
+$$ 
+SELECT film_id, title, release_year FROM film WHERE film_id = f_id ; 
+$$ 
+LANGUAGE SQL;
+
+SELECT * FROM get_film_summary (40);
+------------------------------------------------------------------------------------------------
+
+-- DELETE DUPLICATE FROM TABLE
+DELETE FROM
+    basket a
+        USING basket b
+WHERE
+    a.id < b.id
+    AND a.fruit = b.fruit;
+------------------------------------------------------------------------------------------------
+
+-- CASE
+SELECT title,
+       length,
+       CASE
+           WHEN length> 0
+                AND length <= 50 THEN 'Short'
+           WHEN length > 50
+                AND length <= 120 THEN 'Medium'
+           WHEN length> 120 THEN 'Long'
+       END duration
+FROM film
+ORDER BY title;
+	
+-- COALESCE
+-- takes first value which is not null
+SELECT product, (price - COALESCE(discount,0)) AS net_price FROM items;
+------------------------------------------------------------------------------------------------
+
+-- CAST
+SELECT '100'::INTEGER, '01-OCT-2015'::DATE;
+SELECT CAST ('100' AS INTEGER);
+SELECT CAST ('2015-01-01' AS DATE);
+SELECT CAST ('10.2' AS DOUBLE);
+SELECT CAST('true' AS BOOLEAN);
+SELECT '2019-06-15 14:30:20'::timestamp;
+   
+-- EXPLAIN
+EXPLAIN SELECT * FROM film;
+------------------------------------------------------------------------------------------------
+
+-- VIEW
+CREATE OR REPLACE VIEW view_name AS query;
+ALTER VIEW customer_master RENAME TO customer_info;
+DROP VIEW IF EXISTS customer_info;
+
+-- TRIGGER
+CREATE FUNCTION trigger_function() 
+   RETURNS TRIGGER 
+   LANGUAGE PLPGSQL
+AS $$
+BEGIN
+   -- trigger logic
+END;
+$$
+
+CREATE TRIGGER trigger_name 
+   {BEFORE | AFTER} { event }
+   ON table_name
+   [FOR [EACH] { ROW | STATEMENT }]
+       EXECUTE PROCEDURE trigger_function
+------------------------------------------------------------------------------------------------
+
+-- EXAMPLE
+-- OLD and NEW represent the states of the row in the table before or after the triggering event
+-- one or more trigger events such as INSERT, UPDATE, and DELETE
+CREATE OR REPLACE FUNCTION log_last_name_changes()
+  RETURNS TRIGGER 
+  LANGUAGE PLPGSQL
+  AS
+$$
+BEGIN
+	IF NEW.last_name <> OLD.last_name THEN
+		 INSERT INTO employee_audits(employee_id,last_name,changed_on)
+		 VALUES(OLD.id,OLD.last_name,now());
+	END IF;
+
+	RETURN NEW;
+END;
+$$
+
+CREATE TRIGGER last_name_changes
+  BEFORE UPDATE
+  ON employees
+  FOR EACH ROW
+  EXECUTE PROCEDURE log_last_name_changes();
+  
+DROP TRIGGER last_name_changes;
+
+ALTER TRIGGER last_name_changes
+ON employees
+RENAME TO last_name_changes_new;
+------------------------------------------------------------------------------------------------
 
 
 
@@ -353,4 +508,19 @@ CREATE TABLE Orders (
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
 
