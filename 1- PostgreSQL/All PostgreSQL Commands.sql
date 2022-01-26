@@ -502,6 +502,23 @@ ON employees
 RENAME TO last_name_changes_new;
 ------------------------------------------------------------------------------------------------
 
+-- ON CONFLICT
+INSERT INTO person (id, first_name) VALUES (2017, 'shashank');
+-- above query will give error if id as 2017 already exists
+INSERT INTO person (id, first_name) VALUES (2017, 'shashank') ON CONFLICT (id) DO NOTHING;
+------------------------------------------------------------------------------------------------
+
+-- UPSERT
+-- update email with latest added value
+-- email is the old one, EXCLUDED email is the new one going to be inserted
+INSERT INTO person (id, email) VALUES (2017, 'shashank@abc.com') 
+ON CONFLICT (email) DO UPDATE SET email = EXCLUDED.email;
+
+INSERT INTO person (id, email) VALUES (2017, 'shashank@abc.com') 
+ON CONFLICT (email) DO UPDATE SET email = EXCLUDED.email, id = EXCLUDED.id;
+------------------------------------------------------------------------------------------------
+
+-- WINDOW FUNCTION
 
 
 
