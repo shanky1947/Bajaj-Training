@@ -6,8 +6,9 @@ app.set('views','./views');
 
 app.get('/dynamic_view', function(req,res){
     res.render('dynamic', {
-        name: "TutorialsPoint",
-        url: "https://www.tutorialspoint.com"
+        // name: "TutorialsPoint",
+        // url: "https://www.tutorialspoint.com"
+        user: {name: "Shashank", age: 23}
     });
     // res.send("Hello");
 });

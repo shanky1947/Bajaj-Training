@@ -1,8 +1,13 @@
 html 
     head 
-        title=name 
+        //- title=name 
+        title Simple Template
     body 
         //- h1=name 
-        h1 Greetings from #{name}
-        a(href = url) URL
+        //- h1 Greetings from #{name}
+        //- a(href = url) URL
+        if(user)
+            h1 Hi, #{user.name}
+        else 
+            a(href = "/sign_up") Sign Up
 
