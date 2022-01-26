@@ -273,10 +273,78 @@ COPY persons(first_name, last_name, dob, email)
 FROM 'C:\sampledb\persons.csv'
 DELIMITER ','
 CSV HEADER;
+------------------------------------------------------------------------------------------------
 
+-- SELECT INTO
+SELECT film_id, title, rental_rate INTO TABLE film_r FROM film 
+WHERE rating = 'R' AND rental_duration = 5 ORDER BY title;
 
+-- CREATE TABLE AS
+CREATE TABLE new_table_name AS query;
+-- If you want the table columns to have different names
+CREATE TABLE new_table_name ( column_name_list) AS query;
 
+-- SERIAL
+CREATE TABLE table_name(id SERIAL, name VARCHAR NOT NULL);
+INSERT INTO fruits(name) VALUES('Orange');
+-- OR
+INSERT INTO fruits(id,name) VALUES(DEFAULT,'Apple');
+------------------------------------------------------------------------------------------------
 
+-- ALTER
+ALTER TABLE links ADD COLUMN active VARCHAR(10) SET active=somevalue;
+ALTER TABLE customers ADD COLUMN fax VARCHAR, ADD COLUMN email VARCHAR;
+ALTER TABLE assets ALTER COLUMN location TYPE VARCHAR, ALTER COLUMN description TYPE VARCHAR;
+ALTER TABLE links DROP COLUMN active;
+ALTER TABLE links RENAME COLUMN title TO link_title;
+ALTER TABLE links ADD CONSTRAINT unique_url UNIQUE ( url );
+ALTER TABLE links RENAME TO urls;
+------------------------------------------------------------------------------------------------
+
+-- TRUNCATE
+TRUNCATE TABLE table_name;
+
+-- COPY TABLE
+CREATE TABLE contact_backup AS TABLE contacts;
+
+-- PRIMARY KEY
+CREATE TABLE Persons (
+    ID int NOT NULL,
+    LastName varchar(255) NOT NULL,
+    FirstName varchar(255),
+    Age int,
+    CONSTRAINT PK_Person PRIMARY KEY (ID,LastName)
+);
+ALTER TABLE Persons ADD CONSTRAINT PK_Person PRIMARY KEY (ID,LastName);
+
+ALTER TABLE table_name ADD PRIMARY KEY (column_1, column_2);
+ALTER TABLE vendors ADD COLUMN ID SERIAL PRIMARY KEY;
+
+ALTER TABLE table_name DROP CONSTRAINT primary_key_constraint;
+------------------------------------------------------------------------------------------------
+
+-- FOREIGN KEY
+CREATE TABLE Orders (
+    OrderID int NOT NULL,
+    OrderNumber int NOT NULL,
+    PersonID int,
+    PRIMARY KEY (OrderID),
+    CONSTRAINT FK_PersonOrder FOREIGN KEY (PersonID) REFERENCES Persons(PersonID)
+);
+ALTER TABLE Persons ADD CONSTRAINT FK_Person FOREIGN KEY (PersonID) REFERENCES Persons(PersonID);
+
+ALTER TABLE table_name DROP CONSTRAINT FK_Person;
+
+-- ON DELETE CASCADE
+-- The ON DELETE CASCADE automatically deletes all the referencing rows in the child table when the referenced rows in the parent table are deleted
+CREATE TABLE Orders (
+    OrderID int NOT NULL,
+    OrderNumber int NOT NULL,
+    PersonID int,
+    PRIMARY KEY (OrderID),
+    CONSTRAINT FK_PersonOrder FOREIGN KEY (PersonID) REFERENCES Persons(PersonID) ON DELETE CASCADE
+);
+------------------------------------------------------------------------------------------------
 
 
 
