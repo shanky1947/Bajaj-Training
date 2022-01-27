@@ -12,14 +12,14 @@ app.set('view engine', 'pug');
 app.set('views', './views');
 
 // for parsing application/json
-app.use(bodyParser.json());
+// app.use(bodyParser.json());
 
 // for parsing application/form-urlencoded
 app.use(bodyParser.urlencoded({extended: true}));
 
 // for parsing multipart/form-data
-app.use(upload.array());
-app.use(express.static('public'));
+// app.use(upload.array());
+// app.use(express.static('public'));
 
 app.post('/', function(req, res){
     console.log("First Name is: "+req.body.fn+", Last Name is: "+req.body.ln);
