@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 var things = require('./things');
 app.use('/things', things);
 
-
+//Main routes
 app.get('/main', function(req, res){
     res.render('main');
 });
