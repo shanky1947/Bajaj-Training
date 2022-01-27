@@ -48,4 +48,39 @@ app.post('/person', function(req, res){
     }
 });
 
+
+
+//RETRIEVING DOCUMENTS
+//Model.find(conditions, callback)
+//Model.findOne(conditions, callback)
+//Model.findById(id, callback)
+
+app.get('/find_person', function(req, res){
+    Person.find(function(err, response){
+        // console.log(response);
+        res.json(response);
+    });
+});
+
+app.get('/find_person_Shashank', function(req, res){
+    Person.find({name: "shashank", age:22}, function(err, response){
+        // console.log(response);
+        res.json(response);
+    })
+})
+
+app.get('/find_person_Indian', function(req, res){
+    Person.find({nationality: "Indian"}, "name", function(err, response){
+        // console.log(response);
+        res.json(response);
+    })
+})
+
+
+
+//UPDATING DOCUMENTS
+//Model.update(condition, updates, callback)
+//Model.findOneAndUpdate(condition, updates, callback)
+//Model.findByIdAndUpdate(id, updates, callback)
+
 app.listen(8081);
