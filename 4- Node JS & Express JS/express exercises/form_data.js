@@ -22,7 +22,7 @@ app.use(upload.array());
 app.use(express.static('public'));
 
 app.post('/', function(req, res){
-    console.log(req.body);
+    console.log("First Name is: "+req.body.fn+", Last Name is: "+req.body.ln);
     res.send("recieved your request!");
 });
 
