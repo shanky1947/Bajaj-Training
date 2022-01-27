@@ -2,15 +2,28 @@ html
     head 
         title Update 
     body 
-        form(action = "main", method = "POST")
+        form(action = "update", method = "POST")
             div 
-                label(for="name") Enter the new name:
-                input(name="name")
+                h3 Search Details
+                label(for="oname") Enter search name:
+                input(name="oname")
                 br
-                label(for="age") Enter the age: 
-                input(name="name")
+                label(for="oage") Enter search age: 
+                input(name="oage")
                 br
-                label(for="nationality") Enter the new nation:
-                input(name="nationality")
+                label(for="onationality") Enter search nationality:
+                input(name="onationality")
+                br
+                br
+                h3 New Details
+                label(for="nname") Enter new name:
+                input(name="nname")
+                br
+                label(for="nage") Enter new age:
+                input(name="nage")
+                br
+                label(for="nnationality") Enter new nationality:
+                input(name="nnationality")
+                br
                 br
                 button(type="submit") Submit

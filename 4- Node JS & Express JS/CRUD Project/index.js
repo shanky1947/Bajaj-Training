@@ -1,24 +1,16 @@
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
-var mongoose = require('mongoose');
+
 
 app.set('view engine', 'pug');
 app.set('views', './views');
 app.use(bodyParser.urlencoded({extended: true}));
 
-mongoose.connect('mongodb://localhost/my_db');
 
-var personSchema = mongoose.Schema({
-    name: String,
-    age: Number,
-    nationality: String
-});
-
-var Person = mongoose.model("Person", personSchema);
-
-var things = require('./mongoosedb_things');
+var things = require('./things');
 app.use('/things', things);
+
 
 app.get('/main', function(req, res){
     res.render('main');
@@ -34,7 +26,6 @@ app.post('/main', function(req, res){
         res.redirect('/things/update');
     else if(value=='d')
         res.redirect('/things/delete');
-    res.redirect('/main');
 });
 
 
