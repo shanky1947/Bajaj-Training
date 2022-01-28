@@ -27,6 +27,10 @@ app.post('/signup', function(req, res){
         res.send("Invalid details!");
     }
     else{
+        //Array.filter(function(temp_varible){})
+        //temp_variable will be of type of each value of array
+        //it returns an array of values satisfying condition giving in the codition iinside function
+        //it is similar to for each loop
         Users.filter(function(user){
             if(user.id === req.body.id){
                 res.render('signup', {message: "User already exist! Login ot choose another user id"});
@@ -40,13 +44,16 @@ app.post('/signup', function(req, res){
 });
 
 function checkSignIn(req, res, next){
+    //Kind of error handling
     if(req.session.user){
         next(); //If session exists proceed to page
+        //will go to res render protected page
     }
     else{
         var err = new Error("Not logged in!");
         console.log(req.session.user);
         next(err);  //Error, trying to acces unauthorized page!
+        //will go to app.use route, as it has error parameter
     }
 };
 
@@ -76,7 +83,7 @@ app.post('/login', function(req, res){
                 res.redirect('/protected_page');
             }
             else   
-            res.render('login', {message: "Invalid credentials!"});
+                res.render('login', {message: "Invalid credentials!"});
         });
     }
 });
