@@ -19,14 +19,14 @@ app.get('/main', function(req, res){
 app.post('/main', function(req, res){
     var value = req.body.label;
     if(value=='c')
-        res.redirect('/things/create');
+        res.redirect('/things/create', {message: "Redirect to create page"});
     else if(value=='v')
-        res.redirect('/things/view');
+        res.redirect('/things/view', {message: "Redirect to view page"});
     else if(value=='u')
-        res.redirect('/things/update');
+        res.redirect('/things/update', {message: "Redirect to update page"});
     else if(value=='d')
-        res.redirect('/things/delete');
+        res.redirect('/things/delete', {message: "Redirect to delete page"});
 });
 
 
-app.listen(8081);
+module.exports = app.listen(8081);
