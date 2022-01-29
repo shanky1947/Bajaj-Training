@@ -17,5 +17,8 @@
     "nodemailer": "^6.7.2",
     "nodemon": "^2.0.15",
     "pug": "^3.0.2"
+  },
+  "devDependencies": {
+    "mocha": "^9.2.0"
   }
 }
