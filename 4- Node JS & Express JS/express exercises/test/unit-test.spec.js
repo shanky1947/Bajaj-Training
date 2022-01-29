@@ -1,5 +1,5 @@
 const assert = require('assert');
-const requestTime = require('../testing.js');
+const requestTime = require('../request-time_test.js');
 
 //UNIT TEST
 //describe(title, callback) -> creates a suit 
@@ -15,4 +15,3 @@ describe('requestTime middleware', function(){
     });
 });
 
-//INTEGRATION TEST
