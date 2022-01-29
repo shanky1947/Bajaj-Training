@@ -1,4 +1,7 @@
+//UNIT TEST
 module.exports = (req, res, next) => {
-    req.resuestTime = Date.noe();
+    req.requestTime = Date.now();
     next();
 };
+
+//INTEGRATION TEST
