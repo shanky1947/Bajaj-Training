@@ -1,6 +1,6 @@
 //INTEGRATION TEST
 const assert = require('assert');
-const app = require('../index_test');
+const app = require('../test2');
 const request = require('supertest');
 
 describe('GET /unix-timestamp', function(){
@@ -20,7 +20,7 @@ describe('GET /unix-timestamp', function(){
 //2nd Method- Promise style
 // describe('GET /unix-timestamp', function(){
 //     it('should respond with JSON object containing timestamp', function(){
-//         request(app).get('/unix-timestamp').expect(200).then(res => {
+//         return request(app).get('/unix-timestamp').expect(200).then((res) => {
 //             assert.ok(res.body.timestamp < 1e10);
 //         });
 //     });

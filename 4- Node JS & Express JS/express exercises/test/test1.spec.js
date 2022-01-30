@@ -1,5 +1,5 @@
 const assert = require('assert');
-const requestTime = require('../request-time_test.js');
+const requestTime = require('../test1.js');
 
 //UNIT TEST
 // describe(title, callback) -> creates a suit 
@@ -8,7 +8,7 @@ describe('requestTime middleware', function(){
     it('should add a `requestTime` property to the `req` parameter', function(){
         // call function
         const req = {};
-        requestTime(req, null);
+        requestTime(req, null, ()=>{});
 
         // make assertion
         assert.ok(req.requestTime>0);
@@ -20,7 +20,7 @@ describe('requestTime middleware', function(){
 //         const req = {};
 //         requestTime(req, null);
 
-//         assert.ok(req.message === "Shashanks is 23 years old");
+//         assert.ok(req.message === "Shashank is 23 years old");
 //     });
 // });
 

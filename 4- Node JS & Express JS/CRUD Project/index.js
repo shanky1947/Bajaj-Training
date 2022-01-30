@@ -6,6 +6,7 @@ var bodyParser = require('body-parser');
 app.set('view engine', 'pug');
 app.set('views', './views');
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 
 
 var things = require('./things');
@@ -19,14 +20,14 @@ app.get('/main', function(req, res){
 app.post('/main', function(req, res){
     var value = req.body.label;
     if(value=='c')
-        res.redirect('/things/create', {message: "Redirect to create page"});
+        res.redirect('/things/create');
     else if(value=='v')
-        res.redirect('/things/view', {message: "Redirect to view page"});
+        res.redirect('/things/view');
     else if(value=='u')
-        res.redirect('/things/update', {message: "Redirect to update page"});
+        res.redirect('/things/update');
     else if(value=='d')
-        res.redirect('/things/delete', {message: "Redirect to delete page"});
+        res.redirect('/things/delete');
 });
 
-
-module.exports = app.listen(8081);
+app.listen(8081);
+module.exports = app;
