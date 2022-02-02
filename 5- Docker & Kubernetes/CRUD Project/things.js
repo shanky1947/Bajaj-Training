@@ -3,7 +3,7 @@ var router = express.Router();
 
 //DATABASE
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/my_db');
+mongoose.connect('mongodb://admin:password@localhost:27017/my_db');
 var personSchema = mongoose.Schema({
     name: String,
     age: Number,

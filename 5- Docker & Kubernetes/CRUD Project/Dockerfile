@@ -7,4 +7,4 @@ RUN mkdir -p /home/app
 
 COPY . /home/app
 
-CMD ["node", "index.js"]
+CMD ["node", "/home/app/index.js"]
