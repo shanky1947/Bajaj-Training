@@ -1,0 +1,59 @@
+Case Study - 5th Feb Dec 2021:
+----------------------------------------
+Global-tech incorporation is leading Biotech & Medical distribution
+company, has decided to migrate their data warehouse (around volume
+of 300TB uncompressed) to Cloud. Also, this organization has decided to
+migrate all downstream applications to Azure. Since its COVID –
+pandemic situation, hence its critical time & ETA is very less, the whole
+migration had to happen seamlessly, Using Azure cloud Service – we
+have to develop solutions for Global-tech. and migration activity to be
+performed.
+
+Cases:-
+1. Create new Azure VM Instance (instance name: globetechvm231) & install docker into it,
+
+explain all steps with screenshots
+
+2. Explain with screenshots - how Docker images will be installed in a VM & explain various features of Docker ?
+
+3. In Azure  -  please create kubernetes cluster called: Bajajkubecluster678
+
+& Create a sample Voting app & explain all steps with screenshots.
+
+4. In Azure please create Windows Server 2019 Datacenter VM & connect the VM with RDP
+
+& explain all steps with screenshots.
+ 
+5. Explain various cloud Service & deployment models with block diagrams & examples ?
+
+6. Explain what is cloud security & how virtualization is achieved with block diagram ?
+
+7. In azure please create Azure Blob & upload sample CSV, Excell, TXT files in it &
+
+explain all steps with screenshots ?
+
+8. In azure please create Azure SQL BataBase & Create the table as Bajajsql123 & Run at least 15 SQL Queries
+
+explain all steps with screenshots ?
+
+9. In Azure please create Azure Data factory, create source & destination storage blobs,
+
+- try to copy a few files from Source blob to destination blob using Azure Data factory.
+
+10. In Azure, please create a Python app service & explain all the steps with screenshots ?
+
+11. Please create Azure databricks & explain with all steps & screenshots ?
+
+12. In Azure databricks - please add data & create table
+(1) Using UI option
+(2) create a table  using the notebook option & explain all the steps.
+
+13. In Azure databricks - please create Cluster & explain with all steps with screenshots ?
+
+14. In Azure databricks - please create sample Notebook & jobs , further assign sample notebook to jobs & run it,
+
+explain with all steps with screenshots ?
+
+15. Explain various features of python & advantages of it over other programming languages ? 
+
+Please create word / PDF file & send it to :  avyuktitraining2@gmail.com 
